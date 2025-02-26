@@ -31,7 +31,7 @@ owner = st.selectbox("Owner Type", ['First Owner', 'Second Owner', 'Third Owner'
 mileage = st.number_input("Mileage (km/l)", min_value=5.0, max_value=30.0, step=0.1)
 engine = st.number_input("Engine Capacity (cc)", min_value=800, max_value=5000, step=100)
 max_power = st.number_input("Max Power (bhp)", min_value=40.0, max_value=500.0, step=5.0)
-seats = st.number_input("Number of Seats", min_value=2, max_value=10, step=1)
+seats = st.number_input("Number of Seats", min_value=4, max_value=10, step=1)
 
 # Prediction button
 if st.button("Predict Price"):
