@@ -2,14 +2,20 @@ import streamlit as st
 import pandas as pd
 import pickle as pk
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
 
 # Load the trained model
 try:
     with open("model.pkl", "rb") as f:
-        model, le_name, le_fuel, le_seller_type, le_transmission, le_owner = pk.load(f)
+        model = pk.load(f)
 except Exception as e:
     st.error(f"Error loading model: {e}")
+
+# Load the encoders
+try:
+    with open("encoders.pkl", "rb") as f:
+        le_name, le_fuel, le_seller_type, le_transmission, le_owner = pk.load(f)
+except Exception as e:
+    st.error(f"Error loading encoders: {e}")
 
 # Streamlit app title
 st.title("Car Price Prediction App")
