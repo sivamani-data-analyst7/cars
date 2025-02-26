@@ -11,12 +11,16 @@ except Exception as e:
     st.error(f"Error loading model: {e}")
 
 # Streamlit app title
-st.title("Car Price Prediction App 🚗💰")
+st.title("Car Price Prediction App")
 
 st.write("Enter car details to get the estimated selling price:")
 
 # User inputs
-name = st.selectbox("Brand", list(range(1, 32)))
+name = st.selectbox("Brand", list['Maruti', 'Skoda', 'Honda', 'Hyundai', 'Toyota', 'Ford', 'Renault',
+       'Mahindra', 'Tata', 'Chevrolet', 'Datsun', 'Jeep', 'Mercedes-Benz',
+       'Mitsubishi', 'Audi', 'Volkswagen', 'BMW', 'Nissan', 'Lexus',
+       'Jaguar', 'Land', 'MG', 'Volvo', 'Daewoo', 'Kia', 'Fiat', 'Force',
+       'Ambassador', 'Ashok', 'Isuzu', 'Opel'])
 year = st.number_input("Year of Manufacture", min_value=2000, max_value=2025, step=1)
 km_driven = st.number_input("Kilometers Driven", min_value=0, max_value=500000, step=1000)
 fuel = st.selectbox("Fuel Type", [1, 2, 3, 4])  # 1=Diesel, 2=Petrol, 3=LPG, 4=CNG
