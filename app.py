@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle as pk
 import numpy as np
-from sklearn.preprocessing import LabelEncoder
 
 # Load the trained model
 try:
@@ -16,6 +15,9 @@ try:
         le_name, le_fuel, le_seller_type, le_transmission, le_owner = pk.load(f)
 except Exception as e:
     st.error(f"Error loading encoders: {e}")
+
+# Debug: Check if encoders are loaded correctly
+st.write("Encoders loaded:", le_name.classes_)
 
 # Streamlit app title
 st.title("Car Price Prediction App")
