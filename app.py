@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle as pk
 import numpy as np
+from sklearn.preprocessing import LabelEncoder
 
 # Load the trained model
 try:
@@ -8,6 +9,13 @@ try:
         model = pk.load(f)
 except Exception as e:
     st.error(f"Error loading model: {e}")
+
+# Load the encoders
+try:
+    with open("encoders.pkl", "rb") as f:
+        le_name, le_fuel, le_seller_type, le_transmission, le_owner = pk.load(f)
+except Exception as e:
+    st.error(f"Error loading encoders: {e}")
 
 # Streamlit app title
 st.title("Car Price Prediction App")
@@ -33,11 +41,25 @@ seats = st.number_input("Number of Seats", min_value=4, max_value=10, step=1)
 
 # Prediction button
 if st.button("Predict Price"):
-    # Prepare input data (no encoding)
-    input_data = np.array([[name, year, km_driven, fuel, seller_type, transmission, owner, mileage, engine, max_power, seats]])
-    
-    # Make prediction
-    prediction = model.predict(input_data)
-    
-    # Display result
-    st.success(f"Estimated Selling Price: ₹ {round(prediction[0], 2)}")
+    try:
+        # Prepare input data and ensure it has the correct shape for the model
+        input_data = np.array([[name, year, km_driven, fuel, seller_type, transmission, owner, mileage, engine, max_power, seats]])
+
+        # Encode categorical features using pre-loaded label encoders
+        input_data[0][0] = le_name.transform([input_data[0][0]])  # Brand encoding
+        input_data[0][3] = le_fuel.transform([input_data[0][3]])  # Fuel encoding
+        input_data[0][4] = le_seller_type.transform([input_data[0][4]])  # Seller type encoding
+        input_data[0][5] = le_transmission.transform([input_data[0][5]])  # Transmission encoding
+        input_data[0][6] = le_owner.transform([input_data[0][6]])  # Owner encoding
+
+        # Ensure input data is in the correct shape: (1, n_features)
+        input_data = input_data.reshape(1, -1)  # Reshape in case it's not in the correct shape
+
+        # Make prediction
+        prediction = model.predict(input_data)
+
+        # Display result
+        st.success(f"Estimated Selling Price: ₹ {round(prediction[0], 2)}")
+
+    except Exception as e:
+        st.error(f"Error during prediction: {e}")
