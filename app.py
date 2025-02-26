@@ -23,10 +23,11 @@ name = st.selectbox("Brand", ['Maruti', 'Skoda', 'Honda', 'Hyundai', 'Toyota', '
        'Ambassador', 'Ashok', 'Isuzu', 'Opel'])
 year = st.number_input("Year of Manufacture", min_value=2000, max_value=2025, step=1)
 km_driven = st.number_input("Kilometers Driven", min_value=0, max_value=500000, step=1000)
-fuel = st.selectbox("Fuel Type", [1, 2, 3, 4])  # 1=Diesel, 2=Petrol, 3=LPG, 4=CNG
-seller_type = st.selectbox("Seller Type", [1, 2, 3])  # 1=Individual, 2=Dealer, 3=Trustmark Dealer
-transmission = st.selectbox("Transmission", [1, 2])  # 1=Manual, 2=Automatic
-owner = st.selectbox("Owner Type", [1, 2, 3, 4, 5])  # 1=First, 2=Second, etc.
+fuel = st.selectbox("Fuel Type", ['Diesel' 'Petrol' 'LPG' 'CNG'])  # 1=Diesel, 2=Petrol, 3=LPG, 4=CNG
+seller_type = st.selectbox("Seller Type", ['Individual' 'Dealer' 'Trustmark Dealer'])  # 1=Individual, 2=Dealer, 3=Trustmark Dealer
+transmission = st.selectbox("Transmission", ['Manual' 'Automatic'])  # 1=Manual, 2=Automatic
+owner = st.selectbox("Owner Type", ['First Owner' 'Second Owner' 'Third Owner' 'Fourth & Above Owner'
+ 'Test Drive Car'])  # 1=First, 2=Second, etc.
 mileage = st.number_input("Mileage (km/l)", min_value=5.0, max_value=30.0, step=0.1)
 engine = st.number_input("Engine Capacity (cc)", min_value=800, max_value=5000, step=100)
 max_power = st.number_input("Max Power (bhp)", min_value=40.0, max_value=500.0, step=5.0)
